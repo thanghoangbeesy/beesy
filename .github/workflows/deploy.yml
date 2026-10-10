@@ -13,8 +13,12 @@ jobs:
 
       - name: Unzip app source
         run: |
-          if [ -f app.zip ]; then
-            unzip -o app.zip
+          ZIP=$(ls *.zip 2>/dev/null | head -n 1)
+          if [ -n "$ZIP" ]; then
+            echo "Unzipping $ZIP"
+            unzip -o "$ZIP"
+          else
+            echo "No zip found, building from repo source"
           fi
 
       - uses: actions/setup-node@v4
