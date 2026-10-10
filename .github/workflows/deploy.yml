@@ -14,7 +14,7 @@ jobs:
       - name: Unzip app source
         run: |
           ls -la
-          ZIP=$(ls *.zip 2>/dev/null | head -n 1)
+          ZIP=$(find . -name "*.zip" -not -path "./.git/*" 2>/dev/null | head -n 1)
           if [ -n "$ZIP" ]; then
             echo "Unzipping $ZIP"
             unzip -o "$ZIP"
